@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html data-wf-site="53eb9e82a6f42a2f6a367254">
+<html data-wf-site="53eb9e82a6f42a2f6a367254" data-wf-page="53f7a74550dd597647b874b6">
 <head>
   <meta charset="utf-8">
-  <title>STEAM-API</title>
+  <title>What do you want to know?</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="generator" content="Webflow">
   <link rel="stylesheet" type="text/css" href="css/normalize.css">
@@ -33,13 +33,30 @@
     <div class="w-container container">
       <h1 data-ix="new-interaction">Steam API&nbsp;Interaction</h1>
       <p class="subtitle"></p>
-      <div class="w-form sign-up-form">
-        <form action="what-next.php" method="POST" class="w-clearfix" name="wf-form-signup-form" data-name="Signup Form">
-          <input class="w-input field" id="keyword" type="text" placeholder="STEAMID" name="keyword" data-name="keyword" required="required">
-          <input class="w-button button" type="submit" value="Search" data-wait="Finding Friend..." wait="Finding Friend...">
-        </form>
-        
-        </div>
+	  
+	  <?php
+
+		$keyword = $_POST['keyword'];
+		$apikey = "6A5E0383706DC7B0B3B05FBDEB330543";  /* put your API key here */ 
+		$apiparse= "http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=";
+		$idparse= "&steamids=";
+		$playersummary="http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=' .$apikey. '&steamids=' .$keyword. ";
+
+		/* 6A5E0383706DC7B0B3B05FBDEB330543 ss*/
+
+		echo'<form name="selectoption">';
+		echo'<select name="menu" onChange="window.document.location.href=this.options[this.selectedIndex].value;" value="GO">';
+		echo'<option selected="selected">Select One</option>';
+		echo'<option value=http://optimizedgaming.com/testing/steamapi/summary.php>Player Summary Test</option>';
+		echo'<option value=http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=' .$apikey. '&steamids=' .$keyword. '>Player Summary</option>';
+		echo'<option value=http://api.steampowered.com/ISteamUser/GetFriendList/v0001/?key=' .$apikey. '&steamid=' .$keyword. '&relationship=friend>Friends</option>';
+		echo'<option value=http://api.steampowered.com/ISteamUserStats/GetPlayerAchievements/v0001/?appid=440&key=' .$apikey. '&steamid=' .$keyword. '>Achievements</option>';
+		echo'</select>';
+		echo'</form>';
+		
+		?>
+			
+
       </div>
       <div class="image-crop">
         <img src="images/steam.png" alt="53eb9f9dcf6ba7c144ec5c62_steam.png">
@@ -62,7 +79,7 @@
       </div>
     </div>
   </div>
-  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
   <script type="text/javascript" src="js/webflow.js"></script>
   <!--[if lte IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif]-->
 </body>
