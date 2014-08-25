@@ -36,26 +36,25 @@
       <h1 data-ix="new-interaction">Steam API&nbsp;Interaction</h1>
       <p class="subtitle"></p>
 	  
-	  <?php
-		session_start();
-	  
+			<?php
+			session_start();
+			$keyword = $_SESSION['idofuser'];
+			$apikey = "6A5E0383706DC7B0B3B05FBDEB330543";  /* put your API key here */ 
 
-		$keyword = $_POST['keyword'];
-		$_SESSION['idofuser'] =$keyword;
-		$apikey = "6A5E0383706DC7B0B3B05FBDEB330543";  /* put your API key here */ 
-		$apiparse= "http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=";
-		$idparse= "&steamids=";
-		$playersummary="http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=' .$apikey. '&steamids=' .$keyword. ";
 
-		/* 6A5E0383706DC7B0B3B05FBDEB330543 ss*/
+			$profile = file_get_contents('http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=' .$apikey. '&steamids='.$keyword);
+			$arra= $profile->players;
+			$json = json_decode($profile);
+			$run=$json->response->players[0]->steamid;
+			$profilepic=$json->response->players[0]->avatarfull;
+			$country=$json->response->players[0]->loccountrycode;
+			$name=$json->response->players[0]->realname;
+			$state=$json->response->players[0]->locstatecode;
 
-		echo'<form name="selectoption">';
-		echo'<select name="menu" onChange="window.document.location.href=this.options[this.selectedIndex].value;" value="GO">';
-		echo'<option selected="selected">Select One</option>';
-		echo'<option value=player_summary.php>Player Summary</option>';
-		echo'<option value=owned_games.php>How Many Owned Games</option>';
-		echo'</select>';
-		echo'</form>';
+
+			echo '<center><p><img src ="'.$profilepic.'">';
+			echo '<center><h1>'.$name.'</h1>';
+			echo '<center><h2> Country:'.$country.'<br> State:'.$state.'<h2>';
 		
 		?>
 			
@@ -76,7 +75,7 @@
     <div class="w-container">
       <div class="w-row">
         <div class="w-col w-col-6 w-col-small-6">
-          <div class="copyright">Â©&nbsp;Tola, Shaun, Runhong, Alexa</div>
+          <div class="copyright">©&nbsp;Tola, Shaun, Runhong, Alexa</div>
         </div>
         <div class="w-col w-col-6 w-col-small-6 align-right"></div>
       </div>

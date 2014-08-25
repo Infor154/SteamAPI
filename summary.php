@@ -1,10 +1,12 @@
-<?php
 
-// $keyword = $_POST['$keyword'];
+
+<?php
+session_start();
+$keyword = $_SESSION['idofuser'];
 $apikey = "6A5E0383706DC7B0B3B05FBDEB330543";  /* put your API key here */ 
 
 
-$profile = file_get_contents('http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=' .$apikey. '&steamids=76561198000900511');
+$profile = file_get_contents('http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=' .$apikey. '&steamids='.$keyword);
 $arra= $profile->players;
 $json = json_decode($profile);
 $run=$json->response->players[0]->steamid;
